@@ -45,7 +45,7 @@ function compress(inputPath, outputPath, videoKbps) {
       .videoBitrate(videoKbps)
       .audioCodec('aac')
       .audioBitrate('128k')
-      .outputOptions(['-preset fast', '-movflags +faststart'])
+      .outputOptions(['-preset ultrafast', '-movflags +faststart', '-threads 1'])
       .output(outputPath)
       .on('end', resolve)
       .on('error', reject)
