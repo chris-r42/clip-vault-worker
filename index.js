@@ -13,11 +13,6 @@ const {
   CLOUDFLARE_STREAM_API_TOKEN,
 } = process.env
 
-console.log('Env check:', {
-  WORKER_SECRET: WORKER_SECRET ? '✓ set' : '✗ missing',
-  CLOUDFLARE_ACCOUNT_ID: CLOUDFLARE_ACCOUNT_ID ? '✓ set' : '✗ missing',
-  CLOUDFLARE_STREAM_API_TOKEN: CLOUDFLARE_STREAM_API_TOKEN ? '✓ set' : '✗ missing',
-})
 
 const THRESHOLD_MB = 150
 const TARGET_MB = 140
@@ -77,10 +72,7 @@ async function uploadToCloudflare(filePath, mimeType) {
     }
   )
 
-  if (!initRes.ok) {
-    const body = await initRes.text()
-    throw new Error(`Cloudflare init failed: ${initRes.status} - ${body}`)
-  }
+  if (!initRes.ok) throw new Error(`Cloudflare init failed: ${initRes.status}`)
   const { result } = await initRes.json()
   const { uploadURL, uid } = result
 
