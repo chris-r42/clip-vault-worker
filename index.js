@@ -71,7 +71,10 @@ async function uploadToCloudflare(filePath, mimeType) {
     }
   )
 
-  if (!initRes.ok) throw new Error(`Cloudflare init failed: ${initRes.status}`)
+  if (!initRes.ok) {
+    const body = await initRes.text()
+    throw new Error(`Cloudflare init failed: ${initRes.status} - ${body}`)
+  }
   const { result } = await initRes.json()
   const { uploadURL, uid } = result
 
