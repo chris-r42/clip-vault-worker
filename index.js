@@ -1,11 +1,8 @@
 const express = require('express')
 const multer = require('multer')
 const ffmpeg = require('fluent-ffmpeg')
-const ffmpegStatic = require('ffmpeg-static')
 const fs = require('fs')
 const os = require('os')
-
-ffmpeg.setFfmpegPath(ffmpegStatic)
 
 const app = express()
 const PORT = process.env.PORT || 3001
